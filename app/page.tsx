@@ -1,40 +1,23 @@
 import Link from "next/link";
-import { de } from "@/content/de";
+import { content } from "@/content";
 import { capabilities, services, technologies } from "@/data/services";
 import { projects } from "@/data/projects";
 import { products } from "@/data/products";
-
-const process = [
-  ["01", "Discover", "Ziel, Nutzer, Anforderungen und reale technische Grenzen verstehen."],
-  ["02", "Design", "Informationsarchitektur, Interface und Produkterlebnis präzise definieren."],
-  ["03", "Build", "Saubere, typisierte und skalierbare Software produktionsreif umsetzen."],
-  ["04", "Launch", "Testen, ausrollen, beobachten und ohne unnötige Reibung live bringen."],
-  ["05", "Scale", "Auf Basis echter Nutzung iterieren, automatisieren und weiterentwickeln."],
-] as const;
-
-const why = [
-  "Design und Engineering aus einem System",
-  "Moderne Technologie statt Legacy-Stack",
-  "AI-native Entwicklung, wo sie echten Nutzen schafft",
-  "Skalierbare Architektur statt kurzfristiger Workarounds",
-  "Schnelle Iterationen mit klaren Qualitäts-Gates",
-  "Wartbare Systeme statt Abhängigkeit von Einzelpersonen",
-] as const;
 
 export default function Home() {
   return (
     <main id="main-content">
       <section className="hero shell">
         <div className="heroCopy">
-          <div className="eyebrow">{de.home.eyebrow}</div>
-          <h1>{de.home.title}</h1>
-          <p className="heroLead">{de.home.intro}</p>
+          <div className="eyebrow">{content.home.eyebrow}</div>
+          <h1>{content.home.title}</h1>
+          <p className="heroLead">{content.home.intro}</p>
           <div className="heroActions">
-            <Link className="primary" href="/kontakt">{de.home.primaryCta}</Link>
-            <Link className="secondary" href="/projekte">{de.home.secondaryCta}</Link>
+            <Link className="primary" href="/kontakt">{content.home.primaryCta}</Link>
+            <Link className="secondary" href="/projekte">{content.home.secondaryCta}</Link>
           </div>
           <div className="heroMeta" aria-label="Ovara Fokusbereiche">
-            <span>Software</span><span>AI</span><span>Digital Products</span><span>Web</span>
+            {content.home.focusAreas.map((area) => <span key={area}>{area}</span>)}
           </div>
         </div>
         <div className="signalVisual" aria-hidden="true">
@@ -48,15 +31,15 @@ export default function Home() {
 
       <section className="statement">
         <div className="shell statementInner">
-          <span>OVARA</span>
-          <p>Technology built for <strong>what’s next.</strong></p>
+          <span>{content.home.statementLabel}</span>
+          <p>{content.home.statementPrefix} <strong>{content.home.statementEmphasis}</strong></p>
         </div>
       </section>
 
       <section className="section shell" id="what-we-build">
         <div className="sectionHead">
-          <div><div className="eyebrow">01 / WHAT WE BUILD</div><h2>{de.home.buildTitle}</h2></div>
-          <p>{de.home.buildIntro}</p>
+          <div><div className="eyebrow">{content.home.buildEyebrow}</div><h2>{content.home.buildTitle}</h2></div>
+          <p>{content.home.buildIntro}</p>
         </div>
         <div className="buildRail">
           {services.map((service, index) => (
@@ -72,8 +55,8 @@ export default function Home() {
       <section className="section workSection">
         <div className="shell">
           <div className="sectionHead">
-            <div><div className="eyebrow">02 / SELECTED WORK</div><h2>{de.home.workTitle}</h2></div>
-            <p>Ausgewählte reale Projekte und Entwicklungsarbeit aus dem Ovara-Umfeld.</p>
+            <div><div className="eyebrow">{content.home.workEyebrow}</div><h2>{content.home.workTitle}</h2></div>
+            <p>{content.home.workIntro}</p>
           </div>
           <div className="workGrid">
             {projects.map((project, index) => (
@@ -83,7 +66,7 @@ export default function Home() {
                   <div className="statusRow"><span>{project.status}</span><span>{project.technologies.join(" · ")}</span></div>
                   <h3>{project.name}</h3>
                   <p>{project.summary}</p>
-                  <strong>Projekt ansehen →</strong>
+                  <strong>{content.global.selectedWorkCta}</strong>
                 </div>
               </Link>
             ))}
@@ -93,8 +76,8 @@ export default function Home() {
 
       <section className="section shell">
         <div className="sectionHead compactHead">
-          <div><div className="eyebrow">03 / OVARA PRODUCTS</div><h2>{de.home.productsTitle}</h2></div>
-          <p>Eigene digitale Produkte werden als eigenständige Marken entwickelt und mit ihrem tatsächlichen Status gezeigt.</p>
+          <div><div className="eyebrow">{content.home.productsEyebrow}</div><h2>{content.home.productsTitle}</h2></div>
+          <p>{content.home.productsIntro}</p>
         </div>
         <div className="workGrid">
           {products.map((product, index) => (
@@ -104,7 +87,7 @@ export default function Home() {
                 <div className="statusRow"><span>{product.status}</span><span>{product.platform}</span></div>
                 <h3>{product.name}</h3>
                 <p>{product.summary}</p>
-                <strong>Produkt ansehen →</strong>
+                <strong>{content.home.productsCta}</strong>
               </div>
             </Link>
           ))}
@@ -114,9 +97,9 @@ export default function Home() {
       <section className="section splitSection">
         <div className="shell splitGrid">
           <div>
-            <div className="eyebrow">04 / CAPABILITIES</div>
-            <h2>{de.home.capabilitiesTitle}</h2>
-            <p className="sectionIntro">Breite technische Kompetenz, aber bewusst fokussiert eingesetzt.</p>
+            <div className="eyebrow">{content.home.capabilitiesEyebrow}</div>
+            <h2>{content.home.capabilitiesTitle}</h2>
+            <p className="sectionIntro">{content.home.capabilitiesIntro}</p>
           </div>
           <div className="capabilityList">
             {capabilities.map((item, index) => <div key={item}><span>{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong></div>)}
@@ -126,28 +109,28 @@ export default function Home() {
 
       <section className="section shell">
         <div className="sectionHead">
-          <div><div className="eyebrow">05 / TECHNOLOGY</div><h2>{de.home.technologyTitle}</h2></div>
-          <p>Technologie wird nach Produktanforderung gewählt — nicht nach Trend. Der Standard bleibt modern, typisiert und wartbar.</p>
+          <div><div className="eyebrow">{content.home.technologyEyebrow}</div><h2>{content.home.technologyTitle}</h2></div>
+          <p>{content.home.technologyIntro}</p>
         </div>
         <div className="techStrip">{technologies.map((tech) => <span key={tech}>{tech}</span>)}</div>
       </section>
 
       <section className="section processSection">
         <div className="shell">
-          <div className="sectionHead"><div><div className="eyebrow">06 / PROCESS</div><h2>{de.home.processTitle}</h2></div><p>Ein klarer Produktprozess ohne Agenturtheater.</p></div>
-          <div className="processGrid">{process.map(([n, title, text]) => <article key={n}><span>{n}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
+          <div className="sectionHead"><div><div className="eyebrow">{content.home.processEyebrow}</div><h2>{content.home.processTitle}</h2></div><p>{content.home.processIntro}</p></div>
+          <div className="processGrid">{content.home.process.map(([n, title, text]) => <article key={n}><span>{n}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
         </div>
       </section>
 
       <section className="section shell">
-        <div className="sectionHead"><div><div className="eyebrow">07 / WHY OVARA</div><h2>{de.home.whyTitle}</h2></div><p>Der Unterschied liegt nicht in Claims, sondern in Entscheidungen während Design und Entwicklung.</p></div>
-        <div className="whyGrid">{why.map((item, index) => <div key={item}><span>0{index + 1}</span><p>{item}</p></div>)}</div>
+        <div className="sectionHead"><div><div className="eyebrow">{content.home.whyEyebrow}</div><h2>{content.home.whyTitle}</h2></div><p>{content.home.whyIntro}</p></div>
+        <div className="whyGrid">{content.home.why.map((item, index) => <div key={item}><span>0{index + 1}</span><p>{item}</p></div>)}</div>
       </section>
 
       <section className="finalCta">
         <div className="shell finalCtaInner">
-          <div><div className="eyebrow">START A PROJECT</div><h2>{de.home.finalTitle}</h2></div>
-          <Link className="primary largeButton" href="/kontakt">Projekt besprechen →</Link>
+          <div><div className="eyebrow">{content.home.finalEyebrow}</div><h2>{content.home.finalTitle}</h2></div>
+          <Link className="primary largeButton" href="/kontakt">{content.global.contactCta}</Link>
         </div>
       </section>
     </main>
