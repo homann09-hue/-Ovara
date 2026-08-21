@@ -35,10 +35,11 @@ export default async function ProjectPage({ params }: Props) {
       </section>
       <section className="section mutedSection">
         <div className="shell caseGrid">
-          <div><div className="eyebrow">CASE STRUCTURE</div><h2>Projektseite bereit für echte Projektdaten.</h2></div>
-          <div>
-            <p>Die Datenstruktur ist für Problem, Lösung, Screenshots, Features, Technologie und Ergebnisse vorbereitet. Inhalte werden erst ergänzt, wenn sie real belegt sind.</p>
-            <p>So bleibt die Case Study glaubwürdig und frei von erfundenen Resultaten.</p>
+          <div><div className="eyebrow">DEVELOPMENT FOCUS</div><h2>Aktueller technischer Fokus.</h2></div>
+          <div className="capabilityList">
+            {project.focus.map((item, index) => (
+              <div key={item}><span>{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong></div>
+            ))}
           </div>
         </div>
       </section>

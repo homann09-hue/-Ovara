@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { products } from "@/data/products";
 import { projects } from "@/data/projects";
 
 const siteUrl = "https://ovara.de";
@@ -19,5 +20,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticEntries, ...projectEntries];
+  const productEntries: MetadataRoute.Sitemap = products.map((product) => ({
+    url: `${siteUrl}/produkte/${product.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticEntries, ...projectEntries, ...productEntries];
 }

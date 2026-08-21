@@ -7,6 +7,7 @@ export type Project = {
   summary: string;
   status: ProjectStatus;
   technologies: readonly string[];
+  focus: readonly string[];
   href?: string;
 };
 
@@ -19,6 +20,12 @@ export const projects: readonly Project[] = [
       "Eigenständige Plattform für moderne Unternehmenswebsites, digitale Verkaufsprozesse und wiederverwendbare Branchenlösungen.",
     status: "Development",
     technologies: ["Next.js", "TypeScript", "Supabase", "Vercel"],
+    focus: [
+      "Wiederverwendbare Website-Systeme für unterschiedliche Branchen entwickeln",
+      "Leads, Admin-Flows und digitale Verkaufsprozesse zusammenführen",
+      "Sichere, wartbare Mandanten- und Datenstrukturen vorbereiten",
+      "Schnelle Auslieferung ohne Template-Eindruck ermöglichen",
+    ],
   },
   {
     slug: "stockpilot",
@@ -28,5 +35,11 @@ export const projects: readonly Project[] = [
       "Datengetriebenes Analyseprodukt für Märkte, Watchlists, News, Sentiment und KI-gestützte Auswertung.",
     status: "Development",
     technologies: ["Next.js", "TypeScript", "APIs", "AI"],
+    focus: [
+      "Marktdaten und Watchlists strukturiert zusammenführen",
+      "News und Sentiment für Analyseprozesse nutzbar machen",
+      "KI-gestützte Auswertung nachvollziehbar in das Produkt integrieren",
+      "Web- und Mobile-Nutzung aus einer gemeinsamen Produktbasis entwickeln",
+    ],
   },
 ];

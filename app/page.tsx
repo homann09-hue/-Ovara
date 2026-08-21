@@ -2,6 +2,7 @@ import Link from "next/link";
 import { de } from "@/content/de";
 import { capabilities, services, technologies } from "@/data/services";
 import { projects } from "@/data/projects";
+import { products } from "@/data/products";
 
 const process = [
   ["01", "Discover", "Ziel, Nutzer, Anforderungen und reale technische Grenzen verstehen."],
@@ -72,7 +73,7 @@ export default function Home() {
         <div className="shell">
           <div className="sectionHead">
             <div><div className="eyebrow">02 / SELECTED WORK</div><h2>{de.home.workTitle}</h2></div>
-            <p>Nur reale Projekte. Keine Demo-Kunden, keine erfundenen Kennzahlen.</p>
+            <p>Ausgewählte reale Projekte und Entwicklungsarbeit aus dem Ovara-Umfeld.</p>
           </div>
           <div className="workGrid">
             {projects.map((project, index) => (
@@ -93,12 +94,20 @@ export default function Home() {
       <section className="section shell">
         <div className="sectionHead compactHead">
           <div><div className="eyebrow">03 / OVARA PRODUCTS</div><h2>{de.home.productsTitle}</h2></div>
-          <p>Eigene Produkte werden hier erst sichtbar, wenn sie real genug sind, um öffentlich gezeigt zu werden.</p>
+          <p>Eigene digitale Produkte werden als eigenständige Marken entwickelt und mit ihrem tatsächlichen Status gezeigt.</p>
         </div>
-        <div className="productPlaceholder">
-          <span>OVARA PRODUCTS</span>
-          <p>Neue Produkte befinden sich in Entwicklung. Keine Platzhalter-Produkte, keine erfundenen Launches.</p>
-          <Link href="/produkte">Produktbereich öffnen →</Link>
+        <div className="workGrid">
+          {products.map((product, index) => (
+            <Link className="workCard" href={`/produkte/${product.slug}`} key={product.slug}>
+              <div className="workVisual"><span>0{index + 1}</span><b>{product.category}</b><div>{product.name.slice(0, 1)}</div></div>
+              <div className="workCopy">
+                <div className="statusRow"><span>{product.status}</span><span>{product.platform}</span></div>
+                <h3>{product.name}</h3>
+                <p>{product.summary}</p>
+                <strong>Produkt ansehen →</strong>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
