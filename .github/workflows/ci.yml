@@ -20,3 +20,22 @@ jobs:
       - run: npm run typecheck
       - run: npm run test
       - run: npm run build
+      - name: Start production server
+        run: |
+          npm run start -- -p 3000 > /tmp/ovara-next.log 2>&1 &
+          echo $! > /tmp/ovara-next.pid
+          for i in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:3000/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/ovara-next.log
+          exit 1
+      - run: npm run test:runtime
+      - name: Stop production server
+        if: always()
+        run: |
+          if [ -f /tmp/ovara-next.pid ]; then
+            kill "$(cat /tmp/ovara-next.pid)" || true
+          fi
