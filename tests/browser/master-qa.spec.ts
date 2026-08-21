@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 const viewports = [
   { width: 375, height: 812 },
@@ -23,12 +23,12 @@ const criticalRoutes = [
   "/kontakt",
 ] as const;
 
-function captureErrors(page: Parameters<typeof test>[0] extends never ? never : any) {
+function captureErrors(page: Page) {
   const errors: string[] = [];
-  page.on("console", (message: { type(): string; text(): string }) => {
+  page.on("console", (message) => {
     if (message.type() === "error") errors.push(`console: ${message.text()}`);
   });
-  page.on("pageerror", (error: Error) => errors.push(`page: ${error.message}`));
+  page.on("pageerror", (error) => errors.push(`page: ${error.message}`));
   return errors;
 }
 
