@@ -1,119 +1,146 @@
-const services = [
-  ["01", "Software", "Individuelle Software für reale Abläufe, Produkte und interne Systeme."],
-  ["02", "Web Apps", "Schnelle, moderne Web-Anwendungen mit sauberer UX und skalierbarer Architektur."],
-  ["03", "Mobile", "Mobile-first Produkte und App-Erlebnisse für iOS, Android und Web."],
-  ["04", "Cloud", "Sichere Backends, Datenflüsse, APIs und Infrastruktur für wachsende Produkte."],
-  ["05", "KI & Automation", "KI-gestützte Workflows, Agenten und Automationen, die echte Arbeit abnehmen."],
-];
+import Link from "next/link";
+import { de } from "@/content/de";
+import { capabilities, services, technologies } from "@/data/services";
+import { projects } from "@/data/projects";
 
-const projects = [
-  ["WebForge", "Websites für lokale Unternehmen", "Eigenständige Plattform für moderne Unternehmenswebsites, Demos, Leads und digitale Verkaufsprozesse."],
-  ["StockPilot", "Finanzanalyse mit KI", "Ein datengetriebenes Produkt für Märkte, Watchlists, News, Sentiment und intelligente Auswertung."],
-  ["Weitere Produkte", "Build. Test. Scale.", "Neue digitale Produkte werden unter Ovara entwickelt, validiert und schrittweise zu eigenständigen Marken ausgebaut."],
-];
+const process = [
+  ["01", "Discover", "Ziel, Nutzer, Anforderungen und reale technische Grenzen verstehen."],
+  ["02", "Design", "Informationsarchitektur, Interface und Produkterlebnis präzise definieren."],
+  ["03", "Build", "Saubere, typisierte und skalierbare Software produktionsreif umsetzen."],
+  ["04", "Launch", "Testen, ausrollen, beobachten und ohne unnötige Reibung live bringen."],
+  ["05", "Scale", "Auf Basis echter Nutzung iterieren, automatisieren und weiterentwickeln."],
+] as const;
+
+const why = [
+  "Design und Engineering aus einem System",
+  "Moderne Technologie statt Legacy-Stack",
+  "AI-native Entwicklung, wo sie echten Nutzen schafft",
+  "Skalierbare Architektur statt kurzfristiger Workarounds",
+  "Schnelle Iterationen mit klaren Qualitäts-Gates",
+  "Wartbare Systeme statt Abhängigkeit von Einzelpersonen",
+] as const;
 
 export default function Home() {
   return (
-    <main>
-      <nav className="nav shell">
-        <a href="#top" className="logo">OVARA</a>
-        <div className="navlinks">
-          <a href="#leistungen">Leistungen</a>
-          <a href="#projekte">Projekte</a>
-          <a href="#kontakt">Kontakt</a>
-        </div>
-        <a className="navcta" href="mailto:homann@ovara.de">Projekt starten</a>
-      </nav>
-
-      <section className="hero shell" id="top">
-        <div className="hero-copy">
-          <div className="eyebrow">TECHNOLOGIE · INNOVATION · ZUKUNFT</div>
-          <h1>Wir entwickeln <span>digitale Systeme</span>, die morgen relevant sind.</h1>
-          <p>
-            Ovara entwickelt Software, Web-Apps, mobile Produkte, Cloud-Systeme und KI-Automationen — von der ersten Idee bis zum produktiven System.
-          </p>
-          <div className="hero-actions">
-            <a className="primary" href="#projekte">Projekte ansehen</a>
-            <a className="secondary" href="mailto:homann@ovara.de">Kontakt aufnehmen</a>
+    <main id="main-content">
+      <section className="hero shell">
+        <div className="heroCopy">
+          <div className="eyebrow">{de.home.eyebrow}</div>
+          <h1>{de.home.title}</h1>
+          <p className="heroLead">{de.home.intro}</p>
+          <div className="heroActions">
+            <Link className="primary" href="/kontakt">{de.home.primaryCta}</Link>
+            <Link className="secondary" href="/projekte">{de.home.secondaryCta}</Link>
+          </div>
+          <div className="heroMeta" aria-label="Ovara Fokusbereiche">
+            <span>Software</span><span>AI</span><span>Digital Products</span><span>Web</span>
           </div>
         </div>
-        <div className="orb-wrap" aria-hidden="true">
-          <div className="orb"><div className="orb-core">O</div></div>
-          <div className="orbit orbit-a" />
-          <div className="orbit orbit-b" />
+        <div className="signalVisual" aria-hidden="true">
+          <div className="signalGrid" />
+          <div className="signalRing ringOne" />
+          <div className="signalRing ringTwo" />
+          <div className="signalCore">O</div>
+          <div className="signalLabel">OVARA / SYSTEM 01</div>
         </div>
       </section>
 
-      <section className="manifesto">
-        <div className="shell manifesto-grid">
-          <div className="manifesto-label">OVARA / 2026</div>
-          <p>Wir entwickeln Lösungen.<br/><span>Für heute. Für morgen. Für dich.</span></p>
+      <section className="statement">
+        <div className="shell statementInner">
+          <span>OVARA</span>
+          <p>Technology built for <strong>what’s next.</strong></p>
         </div>
       </section>
 
-      <section className="section shell" id="leistungen">
-        <div className="section-head">
-          <div>
-            <div className="eyebrow">WAS WIR BAUEN</div>
-            <h2>Technologie mit klarer Funktion.</h2>
-          </div>
-          <p>Keine austauschbaren Digitalprodukte. Ovara verbindet Produktidee, Design, Engineering und Automatisierung zu einem belastbaren Gesamtsystem.</p>
+      <section className="section shell" id="what-we-build">
+        <div className="sectionHead">
+          <div><div className="eyebrow">01 / WHAT WE BUILD</div><h2>{de.home.buildTitle}</h2></div>
+          <p>{de.home.buildIntro}</p>
         </div>
-        <div className="service-grid">
-          {services.map(([n, title, text]) => (
-            <article className="service-card" key={title}>
-              <div className="service-no">{n}</div>
-              <h3>{title}</h3>
-              <p>{text}</p>
+        <div className="buildRail">
+          {services.map((service, index) => (
+            <article className="buildItem" key={service.slug}>
+              <span>0{index + 1}</span>
+              <h3>{service.title}</h3>
+              <p>{service.short}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="section projects" id="projekte">
+      <section className="section workSection">
         <div className="shell">
-          <div className="section-head">
-            <div>
-              <div className="eyebrow">PROJEKTE & PRODUKTE</div>
-              <h2>Unter Ovara entstehen eigenständige Marken.</h2>
-            </div>
-            <p>Ovara ist die technologische Heimat hinter verschiedenen Produkten. Jedes Projekt kann eine eigene Marke, Zielgruppe und Plattform haben.</p>
+          <div className="sectionHead">
+            <div><div className="eyebrow">02 / SELECTED WORK</div><h2>{de.home.workTitle}</h2></div>
+            <p>Nur reale Projekte. Keine Demo-Kunden, keine erfundenen Kennzahlen.</p>
           </div>
-          <div className="project-grid">
-            {projects.map(([name, kicker, text], i) => (
-              <article className="project-card" key={name}>
-                <div className="project-top"><span>0{i + 1}</span><b>{kicker}</b></div>
-                <h3>{name}</h3>
-                <p>{text}</p>
-                <div className="project-line" />
-              </article>
+          <div className="workGrid">
+            {projects.map((project, index) => (
+              <Link className="workCard" href={`/projekte/${project.slug}`} key={project.slug}>
+                <div className="workVisual"><span>0{index + 1}</span><b>{project.category}</b><div>{project.name.slice(0, 1)}</div></div>
+                <div className="workCopy">
+                  <div className="statusRow"><span>{project.status}</span><span>{project.technologies.join(" · ")}</span></div>
+                  <h3>{project.name}</h3>
+                  <p>{project.summary}</p>
+                  <strong>Projekt ansehen →</strong>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="contact" id="kontakt">
-        <div className="shell contact-grid">
+      <section className="section shell">
+        <div className="sectionHead compactHead">
+          <div><div className="eyebrow">03 / OVARA PRODUCTS</div><h2>{de.home.productsTitle}</h2></div>
+          <p>Eigene Produkte werden hier erst sichtbar, wenn sie real genug sind, um öffentlich gezeigt zu werden.</p>
+        </div>
+        <div className="productPlaceholder">
+          <span>OVARA PRODUCTS</span>
+          <p>Neue Produkte befinden sich in Entwicklung. Keine Platzhalter-Produkte, keine erfundenen Launches.</p>
+          <Link href="/produkte">Produktbereich öffnen →</Link>
+        </div>
+      </section>
+
+      <section className="section splitSection">
+        <div className="shell splitGrid">
           <div>
-            <div className="eyebrow">KONTAKT</div>
-            <h2>Eine Idee braucht keinen langen Pitch.</h2>
-            <p>Ein Problem, eine Idee oder ein bestehendes System reicht als Startpunkt. Wir klären, was technisch sinnvoll ist und wie daraus ein Produkt wird.</p>
+            <div className="eyebrow">04 / CAPABILITIES</div>
+            <h2>{de.home.capabilitiesTitle}</h2>
+            <p className="sectionIntro">Breite technische Kompetenz, aber bewusst fokussiert eingesetzt.</p>
           </div>
-          <div className="contact-card">
-            <div><span>Name</span><strong>Angelo Homann</strong></div>
-            <div><span>Rolle</span><strong>Founder & Developer</strong></div>
-            <a href="tel:+4915146227737"><span>Telefon</span><strong>0151 46227737</strong></a>
-            <a href="mailto:homann@ovara.de"><span>E-Mail</span><strong>homann@ovara.de</strong></a>
-            <a href="https://ovara.de"><span>Web</span><strong>ovara.de</strong></a>
+          <div className="capabilityList">
+            {capabilities.map((item, index) => <div key={item}><span>{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong></div>)}
           </div>
         </div>
       </section>
 
-      <footer className="footer shell">
-        <div className="logo">OVARA</div>
-        <p>Technologie · Innovation · Zukunft</p>
-        <span>© 2026 Ovara</span>
-      </footer>
+      <section className="section shell">
+        <div className="sectionHead">
+          <div><div className="eyebrow">05 / TECHNOLOGY</div><h2>{de.home.technologyTitle}</h2></div>
+          <p>Technologie wird nach Produktanforderung gewählt — nicht nach Trend. Der Standard bleibt modern, typisiert und wartbar.</p>
+        </div>
+        <div className="techStrip">{technologies.map((tech) => <span key={tech}>{tech}</span>)}</div>
+      </section>
+
+      <section className="section processSection">
+        <div className="shell">
+          <div className="sectionHead"><div><div className="eyebrow">06 / PROCESS</div><h2>{de.home.processTitle}</h2></div><p>Ein klarer Produktprozess ohne Agenturtheater.</p></div>
+          <div className="processGrid">{process.map(([n, title, text]) => <article key={n}><span>{n}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
+        </div>
+      </section>
+
+      <section className="section shell">
+        <div className="sectionHead"><div><div className="eyebrow">07 / WHY OVARA</div><h2>{de.home.whyTitle}</h2></div><p>Der Unterschied liegt nicht in Claims, sondern in Entscheidungen während Design und Entwicklung.</p></div>
+        <div className="whyGrid">{why.map((item, index) => <div key={item}><span>0{index + 1}</span><p>{item}</p></div>)}</div>
+      </section>
+
+      <section className="finalCta">
+        <div className="shell finalCtaInner">
+          <div><div className="eyebrow">START A PROJECT</div><h2>{de.home.finalTitle}</h2></div>
+          <Link className="primary largeButton" href="/kontakt">Projekt besprechen →</Link>
+        </div>
+      </section>
     </main>
   );
 }
