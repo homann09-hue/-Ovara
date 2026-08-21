@@ -18,16 +18,17 @@ export function SiteFooter() {
         </div>
         <div>
           <strong>Kontakt</strong>
+          <Link href="/kontakt">Projekt starten</Link>
           <a href={`mailto:${de.brand.email}`}>{de.brand.email}</a>
           <span>{de.brand.domain}</span>
         </div>
         <div>
-          <strong>Rechtliches</strong>
-          <Link href="/impressum">Impressum</Link>
-          <Link href="/datenschutz">Datenschutz</Link>
+          <strong>Sprache</strong>
+          <span>Deutsch</span>
+          <span className="footerMuted">English architecture ready</span>
         </div>
       </div>
-      <div className="shell footerBottom">© {new Date().getFullYear()} Ovara</div>
+      <div className="shell footerBottom">© {new Date().getFullYear()} Ovara · Rechtliche Seiten werden erst mit vollständigen echten Betreiberangaben veröffentlicht.</div>
     </footer>
   );
 }
