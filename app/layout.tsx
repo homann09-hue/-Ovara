@@ -3,6 +3,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 import "./pages.css";
+import "./mobile-nav.css";
 
 const siteUrl = "https://ovara.de";
 const title = "Ovara — Building what’s next.";
