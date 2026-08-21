@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { SkipLink } from "@/components/skip-link";
 import "./globals.css";
 import "./pages.css";
+import "./mobile-nav.css";
 
 const siteUrl = "https://ovara.de";
 const title = "Ovara — Building what’s next.";
@@ -38,7 +40,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="de">
       <body>
-        <a className="skipLink" href="#main-content">Zum Inhalt springen</a>
+        <SkipLink />
         <SiteHeader />
         {children}
         <SiteFooter />

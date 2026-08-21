@@ -8,7 +8,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -19,6 +19,7 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run test
+      - run: npx playwright install --with-deps chromium webkit
       - run: npm run build
       - name: Start production server
         run: |
@@ -33,6 +34,7 @@ jobs:
           cat /tmp/ovara-next.log
           exit 1
       - run: npm run test:runtime
+      - run: npm run test:browser
       - name: Stop production server
         if: always()
         run: |
