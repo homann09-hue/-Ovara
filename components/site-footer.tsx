@@ -25,10 +25,9 @@ export function SiteFooter() {
         <div>
           <strong>Sprache</strong>
           <span>Deutsch</span>
-          <span className="footerMuted">English architecture ready</span>
         </div>
       </div>
-      <div className="shell footerBottom">© {new Date().getFullYear()} Ovara · Rechtliche Seiten werden erst mit vollständigen echten Betreiberangaben veröffentlicht.</div>
+      <div className="shell footerBottom">© {new Date().getFullYear()} Ovara · {de.brand.domain}</div>
     </footer>
   );
 }
