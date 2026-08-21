@@ -13,6 +13,7 @@ const routes = [
   "/kontakt",
   "/robots.txt",
   "/sitemap.xml",
+  "/manifest.webmanifest",
 ];
 
 async function get(path) {
@@ -32,6 +33,18 @@ assert.equal(homeResponse.headers.get("x-frame-options"), "DENY");
 assert.equal(homeResponse.headers.get("referrer-policy"), "strict-origin-when-cross-origin");
 assert.match(homeResponse.headers.get("permissions-policy") ?? "", /camera=\(\)/);
 assert.doesNotMatch(home, /placeholder|product pipeline|architecture ready/i);
+assert.match(home, /<link rel="canonical" href="https:\/\/ovara\.de\/?"/i);
+assert.match(home, /<meta name="description" content="[^"]+"/i);
+assert.match(home, /<meta property="og:title" content="[^"]+"/i);
+assert.match(home, /<meta property="og:image" content="[^"]+"/i);
+assert.match(home, /<meta name="twitter:card" content="summary_large_image"/i);
+assert.match(home, /<link rel="manifest" href="\/manifest\.webmanifest"/i);
+
+const ogImage = home.match(/<meta property="og:image" content="([^"]+)"/i)?.[1];
+assert.ok(ogImage, "homepage must expose an OpenGraph image");
+const ogResponse = await fetch(ogImage);
+assert.equal(ogResponse.status, 200, `OpenGraph image returned ${ogResponse.status}`);
+assert.match(ogResponse.headers.get("content-type") ?? "", /^image\//);
 
 const internalLinks = new Set(
   [...home.matchAll(/href=["'](\/[a-z0-9äöüß\-_/]*)["']/gi)]
