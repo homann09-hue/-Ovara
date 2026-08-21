@@ -5,6 +5,7 @@ import { SkipLink } from "@/components/skip-link";
 import "./globals.css";
 import "./pages.css";
 import "./mobile-nav.css";
+import "./a11y-fixes.css";
 
 const siteUrl = "https://ovara.de";
 const title = "Ovara — Building what’s next.";
