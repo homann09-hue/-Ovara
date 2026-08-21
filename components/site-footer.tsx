@@ -1,33 +1,32 @@
 import Link from "next/link";
-import { de } from "@/content/de";
+import { content, defaultLocale } from "@/content";
 
 export function SiteFooter() {
   return (
     <footer className="siteFooter">
       <div className="shell footerGrid">
         <div>
-          <div className="logo">{de.brand.logo}</div>
-          <p>{de.brand.claim}</p>
+          <div className="logo">{content.brand.logo}</div>
+          <p>{content.brand.claim}</p>
         </div>
         <div>
           <strong>Ovara</strong>
-          <Link href="/leistungen">Leistungen</Link>
-          <Link href="/projekte">Projekte</Link>
-          <Link href="/produkte">Produkte</Link>
-          <Link href="/ueber-uns">Über Ovara</Link>
+          {content.nav.slice(0, 4).map(([label, href]) => (
+            <Link key={href} href={href}>{label}</Link>
+          ))}
         </div>
         <div>
           <strong>Kontakt</strong>
-          <Link href="/kontakt">Projekt starten</Link>
-          <a href={`mailto:${de.brand.email}`}>{de.brand.email}</a>
-          <span>{de.brand.domain}</span>
+          <Link href="/kontakt">{content.global.projectCta}</Link>
+          <a href={`mailto:${content.brand.email}`}>{content.brand.email}</a>
+          <span>{content.brand.domain}</span>
         </div>
         <div>
           <strong>Sprache</strong>
-          <span>Deutsch</span>
+          <span>{defaultLocale === "de" ? "Deutsch" : defaultLocale}</span>
         </div>
       </div>
-      <div className="shell footerBottom">© {new Date().getFullYear()} Ovara · {de.brand.domain}</div>
+      <div className="shell footerBottom">© {new Date().getFullYear()} {content.brand.name} · {content.brand.domain}</div>
     </footer>
   );
 }
