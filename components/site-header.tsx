@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { de } from "@/content/de";
+import { content } from "@/content";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -24,17 +24,17 @@ export function SiteHeader() {
     <header className="siteHeader">
       <div className="shell headerInner">
         <Link className="logo" href="/" aria-label="Ovara Startseite" onClick={() => setOpen(false)}>
-          {de.brand.logo}
+          {content.brand.logo}
         </Link>
         <nav className="desktopNav" aria-label="Hauptnavigation">
-          {de.nav.map(([label, href]) => (
+          {content.nav.map(([label, href]) => (
             <Link key={href} href={href}>
               {label}
             </Link>
           ))}
         </nav>
         <Link className="headerCta" href="/kontakt">
-          Projekt starten
+          {content.global.projectCta}
         </Link>
         <button
           className="menuButton"
@@ -50,14 +50,14 @@ export function SiteHeader() {
       </div>
       <div className={`mobileMenu ${open ? "isOpen" : ""}`} id="mobile-navigation" aria-hidden={!open}>
         <nav className="shell mobileNav" aria-label="Mobile Navigation">
-          {de.nav.map(([label, href], index) => (
+          {content.nav.map(([label, href], index) => (
             <Link key={href} href={href} onClick={() => setOpen(false)}>
               <span>{String(index + 1).padStart(2, "0")}</span>
               {label}
             </Link>
           ))}
           <Link className="primary mobileProjectCta" href="/kontakt" onClick={() => setOpen(false)}>
-            Projekt starten
+            {content.global.projectCta}
           </Link>
         </nav>
       </div>
