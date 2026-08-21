@@ -30,7 +30,14 @@ const { response: homeResponse, text: home } = await get("/");
 assert.equal(homeResponse.headers.get("x-content-type-options"), "nosniff");
 assert.equal(homeResponse.headers.get("x-frame-options"), "DENY");
 assert.equal(homeResponse.headers.get("referrer-policy"), "strict-origin-when-cross-origin");
+assert.equal(homeResponse.headers.get("cross-origin-opener-policy"), "same-origin");
+assert.equal(homeResponse.headers.get("cross-origin-resource-policy"), "same-origin");
+assert.match(homeResponse.headers.get("strict-transport-security") ?? "", /max-age=63072000/);
 assert.match(homeResponse.headers.get("permissions-policy") ?? "", /camera=\(\)/);
+const csp = homeResponse.headers.get("content-security-policy") ?? "";
+assert.match(csp, /default-src 'self'/);
+assert.match(csp, /frame-ancestors 'none'/);
+assert.match(csp, /object-src 'none'/);
 assert.doesNotMatch(home, /placeholder|product pipeline|architecture ready/i);
 
 const internalLinks = new Set(
